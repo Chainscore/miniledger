@@ -3,6 +3,7 @@ import * as path from "node:path";
 import type { Command } from "commander";
 import { generateKeyPair, encryptKeystore, serializeKeystore } from "../../identity/index.js";
 import { DEFAULT_CONFIG } from "../../config/index.js";
+import { GENESIS_PROPOSER } from "../../constants.js";
 import { MiniLedgerDB } from "../../storage/database.js";
 import { BlockStore } from "../../storage/block-store.js";
 import { Chain } from "../../core/chain.js";
@@ -48,7 +49,7 @@ export function registerInit(program: Command): void {
 
       const blockStore = new BlockStore(db.raw());
       const chain = new Chain();
-      const genesis = chain.createGenesis(keyPair.publicKey);
+      const genesis = chain.createGenesis(GENESIS_PROPOSER);
       blockStore.insert(genesis);
       db.close();
 

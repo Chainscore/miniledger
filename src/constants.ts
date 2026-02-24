@@ -13,5 +13,8 @@ export const MAX_BLOCK_SIZE_BYTES = 1024 * 1024 * 10; // 10MB
 
 export const EMPTY_MERKLE_ROOT = "0".repeat(64);
 
+// Fixed genesis proposer key so all nodes produce identical genesis blocks
+export const GENESIS_PROPOSER = "0".repeat(64);
+
 export const NONCE_TABLE = "_miniledger_nonces";
 export const META_TABLE = "_miniledger_meta";

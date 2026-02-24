@@ -25,7 +25,7 @@ export function createApp(node: MiniLedgerNode): Hono {
   app.route("/", transactionRoutes(node));
   app.route("/", stateRoutes(node));
   app.route("/", identityRoutes(node));
-  app.route("/", networkRoutes());
+  app.route("/", networkRoutes(node));
   app.route("/", governanceRoutes());
 
   // Root info
