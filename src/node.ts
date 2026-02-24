@@ -28,6 +28,9 @@ import {
 } from "./network/protocol.js";
 import { RaftNode } from "./consensus/raft/raft-node.js";
 import { shortId } from "./utils.js";
+import { ContractRegistry, createContractContext } from "./contracts/index.js";
+import { Governor } from "./governance/governor.js";
+import { ProposalType } from "./governance/proposal.js";
 
 // Events: block:created, block:received, tx:submitted, tx:confirmed, started, stopped, error
 
@@ -56,6 +59,10 @@ export class MiniLedgerNode extends EventEmitter {
   private blockSync: BlockSync | null = null;
   private raft: RaftNode | null = null;
   private raftBlockTimer: ReturnType<typeof setInterval> | null = null;
+
+  // M3: Contracts + Governance
+  private contractRegistry!: ContractRegistry;
+  private governor!: Governor;
 
   private startedAt = 0;
   private running = false;
@@ -95,6 +102,8 @@ export class MiniLedgerNode extends EventEmitter {
     this.blockStore = new BlockStore(this.db.raw());
     this.stateStore = new StateStore(this.db.raw());
     this.txStore = new TxStore(this.db.raw());
+    this.contractRegistry = new ContractRegistry(this.stateStore);
+    this.governor = new Governor(this.stateStore);
 
     // Load or create keypair
     const keystorePath = path.join(this.config.dataDir, "keystore.json");
@@ -471,6 +480,40 @@ export class MiniLedgerNode extends EventEmitter {
       case "state:delete":
         this.stateStore.delete(payload.key);
         break;
+      case "contract:deploy":
+        this.contractRegistry.deploy(
+          payload.name,
+          payload.version,
+          payload.code,
+          tx.sender,
+          blockHeight,
+        );
+        this.log.info({ contract: payload.name, version: payload.version }, "Contract deployed");
+        break;
+      case "contract:invoke": {
+        const ctx = createContractContext({
+          stateStore: this.stateStore,
+          sender: tx.sender,
+          blockHeight,
+          timestamp: tx.timestamp,
+        });
+        this.contractRegistry.invoke(payload.contract, payload.method, ctx, payload.args);
+        break;
+      }
+      case "governance:propose":
+        this.governor.propose({
+          type: (payload.action?.type as ProposalType) ?? ProposalType.Custom,
+          title: payload.title,
+          description: payload.description,
+          proposer: tx.sender,
+          action: payload.action,
+          blockHeight,
+        });
+        this.log.info({ title: payload.title }, "Proposal created");
+        break;
+      case "governance:vote":
+        this.governor.vote(payload.proposalId, tx.sender, payload.vote, blockHeight);
+        break;
       default:
         this.log.warn({ type: tx.type }, "Unhandled transaction type");
     }
@@ -538,6 +581,14 @@ export class MiniLedgerNode extends EventEmitter {
 
   getRaft(): RaftNode | null {
     return this.raft;
+  }
+
+  getContractRegistry(): ContractRegistry {
+    return this.contractRegistry;
+  }
+
+  getGovernor(): Governor {
+    return this.governor;
   }
 
   isRunning(): boolean {
