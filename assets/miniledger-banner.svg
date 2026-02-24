@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" fill="none">
   <!-- Flat black -->
-  <rect width="900" height="300" fill="#000000"/>
+  <rect width="900" height="300" fill="#0a0e17"/>
 
   <!-- Bold accent bar -->
   <rect x="56" y="44" width="6" height="140" rx="3" fill="#3b82f6"/>
@@ -11,13 +11,13 @@
   </text>
 
   <!-- LEDGER — blue, massive -->
-  <text x="420" y="140" font-family="'Courier New', Consolas, 'Liberation Mono', monospace" font-size="110" font-weight="700" letter-spacing="-4" fill="#3b82f6">
+  <text x="330" y="140" font-family="'Courier New', Consolas, 'Liberation Mono', monospace" font-size="110" font-weight="700" letter-spacing="-4" fill="#3b82f6">
     ledger
   </text>
 
   <!-- Tagline -->
   <text x="86" y="180" font-family="'Courier New', Consolas, 'Liberation Mono', monospace" font-size="15" fill="#555555" letter-spacing="5">
-    PRIVATE BLOCKCHAIN FOR NODE.JS
+    PRIVATE BLOCKCHAIN FRAMEWORK
   </text>
 
   <!-- Chain dots -->
@@ -33,13 +33,11 @@
 
   <!-- Feature keywords -->
   <g font-family="'Courier New', Consolas, 'Liberation Mono', monospace" font-size="12" letter-spacing="1">
-    <text x="56" y="260" fill="#333333">zero-config</text>
-    <text x="190" y="260" fill="#333333">sql queries</text>
-    <text x="320" y="260" fill="#333333">raft consensus</text>
-    <text x="480" y="260" fill="#333333">smart contracts</text>
-    <text x="640" y="260" fill="#333333">embeddable</text>
+    <text x="56" y="260" fill="#888888">zero-config</text>
+    <text x="190" y="260" fill="#888888">sql queries</text>
+    <text x="320" y="260" fill="#888888">raft consensus</text>
+    <text x="480" y="260" fill="#888888">smart contracts</text>
+    <text x="640" y="260" fill="#888888">embeddable</text>
   </g>
 
-  <!-- npm line -->
-  <text x="56" y="288" font-family="'Courier New', Consolas, 'Liberation Mono', monospace" font-size="13" fill="#3b82f6" letter-spacing="0.5">$ npm install miniledger</text>
 </svg>
