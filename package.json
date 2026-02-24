@@ -65,8 +65,16 @@
     "p2p",
     "zero-config"
   ],
-  "author": "",
+  "author": "Chainscore Labs <hello@chainscore.finance> (https://chainscorelabs.com)",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Chainscore/miniledger"
+  },
+  "homepage": "https://github.com/Chainscore/miniledger#readme",
+  "bugs": {
+    "url": "https://github.com/Chainscore/miniledger/issues"
+  },
   "dependencies": {
     "@hono/node-server": "^1.19.9",
     "@noble/ciphers": "^2.1.1",
