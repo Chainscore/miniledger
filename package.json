@@ -1,15 +1,16 @@
 {
   "name": "miniledger",
   "version": "0.1.0",
+  "type": "module",
   "description": "The SQLite of private blockchains. Zero-config, embeddable, SQL-queryable.",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "bin": {
@@ -51,6 +52,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
+    "@hono/node-server": "^1.19.9",
     "@noble/ed25519": "^2.2.3",
     "@noble/hashes": "^1.7.1",
     "better-sqlite3": "^11.8.1",
