@@ -1,6 +1,6 @@
 {
   "name": "miniledger",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "type": "module",
   "description": "Private blockchain framework for Node.js — zero-config, embeddable, SQL-queryable. Enterprise-grade permissioned ledger with Raft consensus, smart contracts, and built-in block explorer. The easiest way to add a distributed ledger to any application.",
   "main": "dist/index.cjs",
