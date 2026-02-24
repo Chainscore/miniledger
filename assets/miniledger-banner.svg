@@ -1,43 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" fill="none">
-  <!-- Flat black -->
-  <rect width="900" height="300" fill="#0a0e17"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" fill="none">
+  <!-- Clean dark background -->
+  <rect width="900" height="240" fill="#0f1114"/>
 
-  <!-- Bold accent bar -->
-  <rect x="56" y="44" width="6" height="140" rx="3" fill="#3b82f6"/>
+  <!-- Thin top accent line -->
+  <rect x="0" y="0" width="900" height="3" fill="#3b82f6"/>
 
-  <!-- MINI — white, massive -->
-  <text x="82" y="140" font-family="'Courier New', Consolas, 'Liberation Mono', monospace" font-size="110" font-weight="700" letter-spacing="-4" fill="#ffffff">
-    mini
+  <!-- Product name -->
+  <text x="60" y="105" font-family="'IBM Plex Sans', 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="64" font-weight="600" letter-spacing="-1.5" fill="#ffffff">
+    MiniLedger
   </text>
 
-  <!-- LEDGER — blue, massive -->
-  <text x="330" y="140" font-family="'Courier New', Consolas, 'Liberation Mono', monospace" font-size="110" font-weight="700" letter-spacing="-4" fill="#3b82f6">
-    ledger
+  <!-- Divider -->
+  <rect x="60" y="125" width="60" height="2" fill="#3b82f6"/>
+
+  <!-- Subtitle -->
+  <text x="60" y="158" font-family="'IBM Plex Sans', 'SF Pro Display', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="18" font-weight="400" fill="#8b949e">
+    Private Blockchain Framework for Node.js
   </text>
 
-  <!-- Tagline -->
-  <text x="86" y="180" font-family="'Courier New', Consolas, 'Liberation Mono', monospace" font-size="15" fill="#555555" letter-spacing="5">
-    PRIVATE BLOCKCHAIN FRAMEWORK
+  <!-- Descriptor line -->
+  <text x="60" y="188" font-family="'IBM Plex Mono', 'SF Mono', Consolas, monospace" font-size="13" font-weight="400" fill="#484f58" letter-spacing="0.5">
+    Zero-config · SQL-queryable · Raft consensus · Embeddable
   </text>
 
-  <!-- Chain dots -->
-  <g transform="translate(56, 220)">
-    <circle cx="0" cy="0" r="4" fill="#3b82f6"/>
-    <rect x="4" y="-1.5" width="20" height="3" rx="1.5" fill="#222222"/>
-    <circle cx="28" cy="0" r="4" fill="#3b82f6"/>
-    <rect x="32" y="-1.5" width="20" height="3" rx="1.5" fill="#222222"/>
-    <circle cx="56" cy="0" r="4" fill="#3b82f6"/>
-    <rect x="60" y="-1.5" width="20" height="3" rx="1.5" fill="#222222"/>
-    <circle cx="84" cy="0" r="2.5" fill="#222222"/>
-  </g>
-
-  <!-- Feature keywords -->
-  <g font-family="'Courier New', Consolas, 'Liberation Mono', monospace" font-size="12" letter-spacing="1">
-    <text x="56" y="260" fill="#888888">zero-config</text>
-    <text x="190" y="260" fill="#888888">sql queries</text>
-    <text x="320" y="260" fill="#888888">raft consensus</text>
-    <text x="480" y="260" fill="#888888">smart contracts</text>
-    <text x="640" y="260" fill="#888888">embeddable</text>
-  </g>
-
+  <!-- Install command, right-aligned -->
+  <text x="840" y="218" font-family="'IBM Plex Mono', 'SF Mono', Consolas, monospace" font-size="13" font-weight="400" fill="#3b82f6" text-anchor="end">
+    npm install miniledger
+  </text>
 </svg>
