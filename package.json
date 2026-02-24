@@ -1,6 +1,6 @@
 {
   "name": "miniledger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "The SQLite of private blockchains. Zero-config, embeddable, SQL-queryable.",
   "main": "dist/index.cjs",
