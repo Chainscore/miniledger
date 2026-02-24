@@ -303,8 +303,12 @@ Apache-2.0
 
 <p align="center">
   <br />
-  <a href="https://chainscore.finance">
-    <img src="assets/chainscore-labs.svg" alt="Chainscore Labs" width="240" />
+  <a href="https://chainscorelabs.com">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/chainscore-labs-dark.png" />
+      <source media="(prefers-color-scheme: light)" srcset="assets/chainscore-labs-light.png" />
+      <img src="assets/chainscore-labs-light.png" alt="Chainscore Labs" width="280" />
+    </picture>
   </a>
 </p>
 
