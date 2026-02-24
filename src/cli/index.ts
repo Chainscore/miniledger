@@ -7,6 +7,7 @@ import { registerTx } from "./commands/tx.js";
 import { registerQuery } from "./commands/query.js";
 import { registerKeys } from "./commands/keys.js";
 import { registerPeers } from "./commands/peers.js";
+import { registerDemo } from "./commands/demo.js";
 
 export function createCLI(): Command {
   const program = new Command();
@@ -24,6 +25,7 @@ export function createCLI(): Command {
   registerQuery(program);
   registerKeys(program);
   registerPeers(program);
+  registerDemo(program);
 
   return program;
 }
