@@ -11,6 +11,7 @@ import { stateRoutes } from "./routes/state.js";
 import { identityRoutes } from "./routes/identity.js";
 import { networkRoutes } from "./routes/network.js";
 import { governanceRoutes } from "./routes/governance.js";
+import { searchRoutes } from "./routes/search.js";
 
 /** Find the dashboard directory — works from both src/ and dist/. */
 function findDashboardDir(): string | null {
@@ -52,23 +53,31 @@ export function createApp(node: MiniLedgerNode): Hono {
   app.route("/", identityRoutes(node));
   app.route("/", networkRoutes(node));
   app.route("/", governanceRoutes(node));
+  app.route("/", searchRoutes(node));
 
   // Serve dashboard static files
   const dashboardDir = findDashboardDir();
   if (dashboardDir) {
-    app.get("/dashboard", (c) => {
+    // Serve known static assets by extension
+    app.get("/dashboard/app.js", (c) => {
+      const content = fs.readFileSync(path.join(dashboardDir, "app.js"), "utf-8");
+      return c.text(content, 200, { "Content-Type": "application/javascript" });
+    });
+
+    app.get("/dashboard/style.css", (c) => {
+      const content = fs.readFileSync(path.join(dashboardDir, "style.css"), "utf-8");
+      return c.text(content, 200, { "Content-Type": "text/css" });
+    });
+
+    // SPA: serve index.html for /dashboard and any nested path
+    app.get("/dashboard/*", (c) => {
       const html = fs.readFileSync(path.join(dashboardDir, "index.html"), "utf-8");
       return c.html(html);
     });
 
-    app.get("/dashboard/:file", (c) => {
-      const file = c.req.param("file");
-      const filePath = path.join(dashboardDir, file);
-      if (!fs.existsSync(filePath)) return c.notFound();
-      const ext = path.extname(file);
-      const mime = MIME_TYPES[ext] ?? "application/octet-stream";
-      const content = fs.readFileSync(filePath, "utf-8");
-      return c.text(content, 200, { "Content-Type": mime });
+    app.get("/dashboard", (c) => {
+      const html = fs.readFileSync(path.join(dashboardDir, "index.html"), "utf-8");
+      return c.html(html);
     });
   }
 

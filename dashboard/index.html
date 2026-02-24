@@ -3,97 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MiniLedger Dashboard</title>
+  <title>MiniLedger Explorer</title>
   <link rel="stylesheet" href="/dashboard/style.css">
 </head>
 <body>
-  <header>
-    <h1><span>Mini</span>Ledger</h1>
-    <div class="status-bar">
-      <span><span class="dot green" id="status-dot"></span><span id="status-text">Connecting...</span></span>
-      <span>Node: <strong id="node-id">—</strong></span>
-      <span>Uptime: <strong id="uptime">—</strong></span>
-    </div>
-  </header>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo"><span>Mini</span>Ledger</div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">Explorer</div>
+        <a class="nav-link" href="#/" data-route="/"><span class="nav-icon">&#9632;</span> Overview</a>
+        <a class="nav-link" href="#/blocks" data-route="/blocks"><span class="nav-icon">&#9638;</span> Blocks</a>
+        <a class="nav-link" href="#/transactions" data-route="/transactions"><span class="nav-icon">&#8644;</span> Transactions</a>
+        <a class="nav-link" href="#/state" data-route="/state"><span class="nav-icon">&#9881;</span> State</a>
+        <div class="nav-section">Smart Contracts</div>
+        <a class="nav-link" href="#/contracts" data-route="/contracts"><span class="nav-icon">&#10070;</span> Contracts</a>
+        <a class="nav-link" href="#/governance" data-route="/governance"><span class="nav-icon">&#9878;</span> Governance</a>
+        <div class="nav-section">Network</div>
+        <a class="nav-link" href="#/network" data-route="/network"><span class="nav-icon">&#8943;</span> Network</a>
+      </nav>
+      <div class="sidebar-footer">
+        <span class="dot green" id="status-dot"></span>
+        <span id="status-text">Connecting...</span>
+        <div style="margin-top:4px" id="node-id-short">—</div>
+      </div>
+    </aside>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-value" id="stat-height">0</div>
-      <div class="stat-label">Block Height</div>
-    </div>
-    <div class="stat">
-      <div class="stat-value" id="stat-txpool">0</div>
-      <div class="stat-label">TX Pool</div>
-    </div>
-    <div class="stat">
-      <div class="stat-value" id="stat-peers">0</div>
-      <div class="stat-label">Peers</div>
-    </div>
-    <div class="stat">
-      <div class="stat-value" id="stat-state">0</div>
-      <div class="stat-label">State Keys</div>
-    </div>
-  </div>
-
-  <div class="grid">
-    <!-- Blocks -->
-    <div class="card">
-      <div class="card-header">
-        Recent Blocks
-        <span class="badge" id="block-count">0</span>
-      </div>
-      <div class="card-body" id="blocks-list">
-        <div class="empty-state">Loading blocks...</div>
-      </div>
-    </div>
-
-    <!-- Transactions -->
-    <div class="card">
-      <div class="card-header">
-        Recent Transactions
-        <span class="badge" id="tx-count">0</span>
-      </div>
-      <div class="card-body" id="tx-list">
-        <div class="empty-state">No transactions yet</div>
-      </div>
-    </div>
-
-    <!-- SQL Query -->
-    <div class="card full-width">
-      <div class="card-header">
-        State Explorer
-        <span class="badge">SQL</span>
-      </div>
-      <div class="card-body">
-        <div class="query-area">
-          <input type="text" id="sql-input" placeholder="SELECT * FROM world_state LIMIT 20" value="SELECT * FROM world_state ORDER BY updated_at DESC LIMIT 20">
-          <button onclick="runQuery()">Run Query</button>
+    <!-- Main -->
+    <div class="main">
+      <div class="topbar">
+        <div class="topbar-left">
+          <span>Height: <strong id="tb-height">0</strong></span>
+          <span>Uptime: <strong id="tb-uptime">—</strong></span>
         </div>
-        <div id="query-results">
-          <div class="empty-state">Run a query to see results</div>
+        <div class="search-box">
+          <span class="search-icon">&#128269;</span>
+          <input type="text" id="search-input" placeholder="Search block, tx, address, state key...">
         </div>
       </div>
-    </div>
-
-    <!-- Peers -->
-    <div class="card">
-      <div class="card-header">
-        Network Peers
-        <span class="badge" id="peer-badge">0</span>
-      </div>
-      <div class="card-body" id="peers-list">
-        <div class="empty-state">No peers connected</div>
-      </div>
-    </div>
-
-    <!-- Contracts & Governance -->
-    <div class="card">
-      <div class="card-header">
-        Contracts & Governance
-      </div>
-      <div class="card-body" id="contracts-gov">
-        <div class="empty-state">Loading...</div>
-      </div>
+      <div class="content" id="app"></div>
     </div>
   </div>
 

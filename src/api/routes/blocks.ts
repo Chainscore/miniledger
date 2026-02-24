@@ -21,9 +21,20 @@ export function blockRoutes(node: MiniLedgerNode): Hono {
   app.get("/blocks", async (c) => {
     const stores = node.getStores();
     const currentHeight = stores.blocks.getHeight();
-    const from = Math.max(0, currentHeight - 19); // Last 20 blocks
-    const blocks = stores.blocks.getRange(from, currentHeight);
-    return c.json({ blocks, height: currentHeight });
+    const page = Math.max(1, Number.parseInt(c.req.query("page") ?? "1", 10) || 1);
+    const limit = Math.min(100, Math.max(1, Number.parseInt(c.req.query("limit") ?? "20", 10) || 20));
+
+    // page 1 = newest blocks, descending
+    const toHeight = currentHeight - (page - 1) * limit;
+    const fromHeight = Math.max(0, toHeight - limit + 1);
+
+    if (toHeight < 0) {
+      return c.json({ blocks: [], height: currentHeight, page, limit, totalPages: Math.ceil((currentHeight + 1) / limit) });
+    }
+
+    const blocks = stores.blocks.getRange(fromHeight, toHeight).reverse(); // newest first
+    const totalPages = Math.ceil((currentHeight + 1) / limit);
+    return c.json({ blocks, height: currentHeight, page, limit, totalPages });
   });
 
   return app;
